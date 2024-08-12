@@ -21,7 +21,7 @@ class DbPostgres(SettingsModel):
     def url(self) -> str:
         return str(
             PostgresDsn.build(
-                scheme="postgresql+asyncpg",
+                scheme="postgresql+psycopg2",
                 username=self.username,
                 password=self.password,
                 host=self.host,
