@@ -1,0 +1,18 @@
+services:
+  db_postgres:
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=changethis
+      - POSTGRES_DB=web_app
+      - POSTGRES_HOST=localhost
+      - POSTGRES_PORT=5432
+    container_name: localhost__pg
+    image: postgres:16-alpine
+    shm_size: 128mb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
