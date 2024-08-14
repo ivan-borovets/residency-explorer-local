@@ -9,6 +9,8 @@ from apps.programs.models.directors import Director
 from apps.programs.models.program_statistics import ProgramStatistics
 from apps.programs.models.directors_peers import DirectorsPeer
 from apps.programs.models.peers import Peer
+from apps.programs.models.directors_alumni import DirectorsAlumnus
+from apps.programs.models.alumni import Alumnus
 from core.models import Base
 from core.settings import settings
 
