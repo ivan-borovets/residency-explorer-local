@@ -1,7 +1,12 @@
-from sqlalchemy.orm import Mapped, mapped_column
+from typing import TYPE_CHECKING
+
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from core.models import Base
 from core.models.mixins import IntIdPkMixin
+
+if TYPE_CHECKING:
+    from .directors import Director
 
 
 class Alumnus(IntIdPkMixin, Base):
@@ -11,6 +16,10 @@ class Alumnus(IntIdPkMixin, Base):
     last_name: Mapped[str] = mapped_column(nullable=False, index=True)
     contact_info: Mapped[str] = mapped_column(nullable=False)
     work_location: Mapped[str | None] = mapped_column()
+    # relationships
+    directors: Mapped[list["Director"]] = relationship(
+        secondary="directors_alumni", back_populates="alumni"
+    )
 
     def __repr__(self) -> str:
         return f"<Alumnus(id={self.id}, name={self.first_name} {self.last_name}')>"

@@ -1,8 +1,15 @@
+from typing import TYPE_CHECKING
+
 from sqlalchemy import ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from core.models import Base
 from core.models.mixins import AutoTableNameMixin, IntIdPkMixin
+
+if TYPE_CHECKING:
+    from .directors import Director
+    from .program_statistics import ProgramStatistics
+    from .states import State
 
 
 class Program(AutoTableNameMixin, IntIdPkMixin, Base):
@@ -15,6 +22,12 @@ class Program(AutoTableNameMixin, IntIdPkMixin, Base):
     )
     director_id: Mapped[int] = mapped_column(
         ForeignKey("directors.id"), nullable=False, index=True
+    )
+    # relationships
+    director: Mapped["Director"] = relationship(back_populates="program", uselist=False)
+    state: Mapped["State"] = relationship(back_populates="programs")
+    statistics: Mapped["ProgramStatistics"] = relationship(
+        back_populates="program", uselist=False
     )
 
     def __repr__(self) -> str:

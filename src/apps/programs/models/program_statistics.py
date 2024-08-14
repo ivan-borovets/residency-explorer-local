@@ -1,10 +1,14 @@
 from decimal import Decimal
 from enum import Enum as Python_Enum
+from typing import TYPE_CHECKING
 
 from sqlalchemy import ARRAY, Enum, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from core.models import Base
+
+if TYPE_CHECKING:
+    from .programs import Program
 
 
 class FurtherTrack(Python_Enum):
@@ -37,6 +41,10 @@ class ProgramStatistics(Base):
     additional_info: Mapped[str] = mapped_column()
     # foreign keys
     id: Mapped[int] = mapped_column(ForeignKey("programs.id"), primary_key=True)
+    # relationships
+    program: Mapped["Program"] = relationship(
+        back_populates="statistics", uselist=False
+    )
 
     def __repr__(self) -> str:
         return f"<ProgramStatistics(id={self.id}')>"
