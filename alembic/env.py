@@ -6,6 +6,7 @@ from alembic import context
 from apps.programs.models.programs import Program
 from apps.programs.models.states import State
 from apps.programs.models.directors import Director
+from apps.programs.models.program_statistics import ProgramStatistics
 from core.models import Base
 from core.settings import settings
 
