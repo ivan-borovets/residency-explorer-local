@@ -38,7 +38,7 @@ class ProgramStatistics(Base):
             )
         )
     )
-    additional_info: Mapped[str] = mapped_column()
+    additional_info: Mapped[str | None] = mapped_column()
     # foreign keys
     id: Mapped[int] = mapped_column(ForeignKey("programs.id"), primary_key=True)
     # relationships
