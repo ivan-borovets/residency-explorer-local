@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING
 
-from sqlalchemy import ForeignKey
+from sqlalchemy import CheckConstraint, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from core.models import Base
@@ -16,6 +16,15 @@ class Program(AutoTableNameMixin, IntIdPkMixin, Base):
     code: Mapped[str] = mapped_column(nullable=False, unique=True, index=True)
     title: Mapped[str] = mapped_column(nullable=False)
     city: Mapped[str] = mapped_column(nullable=False)
+    custom_rating: Mapped[int | None] = mapped_column()
+    # constraints
+    __table_args__ = (
+        CheckConstraint(
+            "custom_rating IS NULL OR (custom_rating >= 1 AND custom_rating <= 10)",
+            name="check_custom_rating",
+        ),
+    )
+
     # foreign keys
     state_id: Mapped[int] = mapped_column(
         ForeignKey("states.id"), nullable=False, index=True
