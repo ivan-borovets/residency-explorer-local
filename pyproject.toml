@@ -52,6 +52,7 @@ ignore_missing_imports = true
 disable = [
     "C0111", # "missing-docstring"
     "E1101", # "no-member"
+    "R0801", # "duplicate-code"
     "R0903", # "too-few-public-methods"
     "R0913", # "too-many-arguments"
     "R1705", # "no-else-return"
