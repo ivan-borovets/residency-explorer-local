@@ -2,7 +2,7 @@ from decimal import Decimal
 from enum import Enum as Python_Enum
 from typing import TYPE_CHECKING
 
-from sqlalchemy import ARRAY, Enum, ForeignKey
+from sqlalchemy import ARRAY, CheckConstraint, Enum, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from core.models import Base
@@ -16,6 +16,15 @@ class FurtherTrack(Python_Enum):
     FULLTIME = "full-time"
     RESIDENCY = "residency"
     OTHER = "other"
+
+
+CHECK_PERCENTAGE_NON_US_IMG = (
+    "(percentage_non_us_img >= 0 AND percentage_non_us_img <= 100)"
+)
+CHECK_PERCENTAGE_APPLICANTS_INTERVIEWED = (
+    "(percentage_applicants_interviewed >= 0 AND "
+    "percentage_applicants_interviewed <= 100)"
+)
 
 
 def list_enum_values(enum_input: Python_Enum) -> list:
@@ -39,6 +48,17 @@ class ProgramStatistics(Base):
         )
     )
     additional_info: Mapped[str | None] = mapped_column()
+    # constraints
+    __table_args__ = (
+        CheckConstraint(
+            sqltext=CHECK_PERCENTAGE_NON_US_IMG,
+            name="check_percentage_non_us_img",
+        ),
+        CheckConstraint(
+            sqltext=CHECK_PERCENTAGE_APPLICANTS_INTERVIEWED,
+            name="check_percentage_applicants_interviewed",
+        ),
+    )
     # foreign keys
     id: Mapped[int] = mapped_column(ForeignKey("programs.id"), primary_key=True)
     # relationships

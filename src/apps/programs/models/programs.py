@@ -11,6 +11,10 @@ if TYPE_CHECKING:
     from .program_statistics import ProgramStatistics
     from .states import State
 
+CHECK_CUSTOM_RATING = (
+    "custom_rating IS NULL OR (custom_rating >= 1 AND custom_rating <= 5)"
+)
+
 
 class Program(AutoTableNameMixin, IntIdPkMixin, Base):
     code: Mapped[str] = mapped_column(nullable=False, unique=True, index=True)
@@ -20,11 +24,10 @@ class Program(AutoTableNameMixin, IntIdPkMixin, Base):
     # constraints
     __table_args__ = (
         CheckConstraint(
-            "custom_rating IS NULL OR (custom_rating >= 1 AND custom_rating <= 10)",
+            sqltext=CHECK_CUSTOM_RATING,
             name="check_custom_rating",
         ),
     )
-
     # foreign keys
     state_id: Mapped[int] = mapped_column(
         ForeignKey("states.id"), nullable=False, index=True
