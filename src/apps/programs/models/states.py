@@ -10,11 +10,16 @@ if TYPE_CHECKING:
 
 
 class State(AutoTableNameMixin, IntIdPkMixin, Base):
-    title: Mapped[str] = mapped_column(nullable=False, index=True)
+    # required
+    title: Mapped[str] = mapped_column(
+        nullable=False,
+        index=True,
+    )
     region: Mapped[str] = mapped_column(nullable=False)
-    # relationships
+    # relationships (one-to-many)
     programs: Mapped[list["Program"]] = relationship(
-        back_populates="state", cascade="all, delete-orphan"
+        back_populates="state",
+        cascade="all, delete-orphan",
     )
 
     def __repr__(self) -> str:

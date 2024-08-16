@@ -10,13 +10,21 @@ if TYPE_CHECKING:
 
 
 class Peer(AutoTableNameMixin, IntIdPkMixin, Base):
-    first_name: Mapped[str] = mapped_column(nullable=False, index=True)
-    last_name: Mapped[str] = mapped_column(nullable=False, index=True)
+    # required
+    first_name: Mapped[str] = mapped_column(
+        nullable=False,
+        index=True,
+    )
+    last_name: Mapped[str] = mapped_column(
+        nullable=False,
+        index=True,
+    )
     contact_info: Mapped[str] = mapped_column(nullable=False)
     position: Mapped[str] = mapped_column(nullable=False)
-    # relationships
+    # relationships (many-to-many)
     directors: Mapped[list["Director"]] = relationship(
-        secondary="directors_peers", back_populates="peers"
+        secondary="directors_peers",
+        back_populates="peers",
     )
 
     def __repr__(self) -> str:

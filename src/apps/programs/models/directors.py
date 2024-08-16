@@ -1,5 +1,6 @@
 from typing import TYPE_CHECKING
 
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from core.models import Base
@@ -12,20 +13,40 @@ if TYPE_CHECKING:
 
 
 class Director(AutoTableNameMixin, IntIdPkMixin, Base):
-    first_name: Mapped[str] = mapped_column(nullable=False, index=True)
-    last_name: Mapped[str] = mapped_column(nullable=False, index=True)
+    # required
+    first_name: Mapped[str] = mapped_column(
+        nullable=False,
+        index=True,
+    )
+    last_name: Mapped[str] = mapped_column(
+        nullable=False,
+        index=True,
+    )
     contact_info: Mapped[str] = mapped_column(nullable=False)
+    # foreign keys
+    program_id: Mapped[int] = mapped_column(
+        ForeignKey("programs.id"),
+        nullable=False,
+        index=True,
+    )
+    # optional
     specialty: Mapped[str | None] = mapped_column()
     home_country: Mapped[str | None] = mapped_column()
     additional_info: Mapped[str | None] = mapped_column()
-    # relationships
+    # relationships (one-to-one)
+    program: Mapped["Program"] = relationship(
+        back_populates="director",
+        uselist=False,
+    )
+    # relationships (many-to-many)
     alumni: Mapped[list["Alumnus"]] = relationship(
-        secondary="directors_alumni", back_populates="directors"
+        secondary="directors_alumni",
+        back_populates="directors",
     )
     peers: Mapped[list["Peer"]] = relationship(
-        secondary="directors_peers", back_populates="directors"
+        secondary="directors_peers",
+        back_populates="directors",
     )
-    program: Mapped["Program"] = relationship(back_populates="director", uselist=False)
 
     def __repr__(self) -> str:
         return f"<Director(id={self.id}, name={self.first_name} {self.last_name}')>"

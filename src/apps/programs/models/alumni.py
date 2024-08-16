@@ -12,13 +12,22 @@ if TYPE_CHECKING:
 class Alumnus(IntIdPkMixin, Base):
     __tablename__ = "alumni"
 
-    first_name: Mapped[str] = mapped_column(nullable=False, index=True)
-    last_name: Mapped[str] = mapped_column(nullable=False, index=True)
+    # required
+    first_name: Mapped[str] = mapped_column(
+        nullable=False,
+        index=True,
+    )
+    last_name: Mapped[str] = mapped_column(
+        nullable=False,
+        index=True,
+    )
     contact_info: Mapped[str] = mapped_column(nullable=False)
+    # optional
     work_location: Mapped[str | None] = mapped_column()
-    # relationships
+    # relationships (many-to-many)
     directors: Mapped[list["Director"]] = relationship(
-        secondary="directors_alumni", back_populates="alumni"
+        secondary="directors_alumni",
+        back_populates="alumni",
     )
 
     def __repr__(self) -> str:

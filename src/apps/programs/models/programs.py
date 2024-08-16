@@ -17,9 +17,21 @@ CHECK_CUSTOM_RATING = (
 
 
 class Program(AutoTableNameMixin, IntIdPkMixin, Base):
-    code: Mapped[str] = mapped_column(nullable=False, unique=True, index=True)
+    # required
+    code: Mapped[str] = mapped_column(
+        nullable=False,
+        unique=True,
+        index=True,
+    )
     title: Mapped[str] = mapped_column(nullable=False)
     city: Mapped[str] = mapped_column(nullable=False)
+    # foreign keys
+    state_id: Mapped[int] = mapped_column(
+        ForeignKey("states.id"),
+        nullable=False,
+        index=True,
+    )
+    # optional
     custom_rating: Mapped[int | None] = mapped_column()
     # constraints
     __table_args__ = (
@@ -28,19 +40,17 @@ class Program(AutoTableNameMixin, IntIdPkMixin, Base):
             name="check_custom_rating",
         ),
     )
-    # foreign keys
-    state_id: Mapped[int] = mapped_column(
-        ForeignKey("states.id"), nullable=False, index=True
+    # relationships (one-to-one)
+    director: Mapped["Director"] = relationship(
+        back_populates="program",
+        uselist=False,
     )
-    director_id: Mapped[int] = mapped_column(
-        ForeignKey("directors.id"), nullable=False, index=True
-    )
-    # relationships
-    director: Mapped["Director"] = relationship(back_populates="program", uselist=False)
-    state: Mapped["State"] = relationship(back_populates="programs")
     statistics: Mapped["ProgramStatistics"] = relationship(
-        back_populates="program", uselist=False
+        back_populates="program",
+        uselist=False,
     )
+    # relationships (many-to-one)
+    state: Mapped["State"] = relationship(back_populates="programs")
 
     def __repr__(self) -> str:
         return f"<Program(id={self.id}, code={self.code}, title='{self.title}')>"
