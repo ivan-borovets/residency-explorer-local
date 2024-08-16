@@ -1,12 +1,20 @@
 from pydantic import BaseModel, Field, field_validator
 
+from apps.programs.models.programs import Program
+
 from .constants.constants import STR_MIN_LEN
 
 
 class DirectorIn(BaseModel):
+    class Config:
+        arbitrary_types_allowed = True
+
+    # required
     first_name: str = Field(min_length=STR_MIN_LEN)
     last_name: str = Field(min_length=STR_MIN_LEN)
     contact_info: str = Field(min_length=STR_MIN_LEN)
+    program: Program
+    # optional
     specialty: str | None
     home_country: str | None
     additional_info: str | None

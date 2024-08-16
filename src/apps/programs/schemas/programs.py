@@ -1,12 +1,20 @@
 from pydantic import BaseModel, Field, field_validator
 
+from apps.programs.models.states import State
+
 from .constants.constants import STR_MIN_LEN
 
 
 class ProgramIn(BaseModel):
+    class Config:
+        arbitrary_types_allowed = True
+
+    # required
     code: str = Field(min_length=STR_MIN_LEN)
     title: str = Field(min_length=STR_MIN_LEN)
     city: str = Field(min_length=STR_MIN_LEN)
+    state: State
+    # optional
     custom_rating: int | None
 
     # noinspection PyNestedDecorators

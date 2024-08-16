@@ -6,5 +6,5 @@ from apps.programs.schemas.alumni import AlumniIn
 alumni_view = ModelView(
     model=Alumnus,
     pydantic_model=AlumniIn,
-    label="Alumni",
+    label="Directors' Alumni",
 )

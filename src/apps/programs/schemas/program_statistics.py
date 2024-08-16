@@ -1,19 +1,25 @@
 from decimal import Decimal
-from typing import Annotated
 
 from pydantic import BaseModel, Field, field_validator
 
-from apps.programs.models.program_statistics import FurtherTrack
+from apps.programs.models.further_tracks import FurtherTrack
+from apps.programs.models.programs import Program
 
 from .constants.constants import STR_MIN_LEN
 
 
 class ProgramStatisticsIn(BaseModel):
-    percentage_non_us_img: Annotated[Decimal, Field(ge=0, le=100)]
+    class Config:
+        arbitrary_types_allowed = True
+
+    # required
+    program: Program
+    percentage_non_us_img: Decimal = Field(ge=0, le=100)
+    further_tracks: list[FurtherTrack]
+    # optional
     percentage_applicants_interviewed: Decimal | None
     internship_available: bool | None
     more_than_two_russians_interviewed: bool | None
-    predominant_further_track: list[FurtherTrack] | None
     additional_info: str | None
 
     # noinspection PyNestedDecorators
@@ -29,13 +35,11 @@ class ProgramStatisticsIn(BaseModel):
         return value
 
     # noinspection PyNestedDecorators
-    @field_validator("predominant_further_track")
+    @field_validator("further_tracks")
     @classmethod
-    def check_unique_further_track(
-        cls, value: list[FurtherTrack] | None
-    ) -> list[FurtherTrack] | None:
-        if value and len(value) != len(set(value)):
-            raise ValueError("Each FurtherTrack value must be unique")
+    def check_non_empty(cls, value):
+        if not value:
+            raise ValueError("further_tracks must be a non-empty list")
         return value
 
     # noinspection PyNestedDecorators
