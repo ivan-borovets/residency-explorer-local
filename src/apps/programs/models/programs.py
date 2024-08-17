@@ -11,9 +11,7 @@ if TYPE_CHECKING:
     from .program_statistics import ProgramStatistics
     from .states import State
 
-CHECK_CUSTOM_RATING = (
-    "custom_rating IS NULL OR (custom_rating >= 1 AND custom_rating <= 5)"
-)
+CHECK_USER_RATING = "user_rating IS NULL OR (user_rating >= 1 AND user_rating <= 5)"
 
 
 class Program(AutoTableNameMixin, IntIdPkMixin, Base):
@@ -36,8 +34,8 @@ class Program(AutoTableNameMixin, IntIdPkMixin, Base):
     # constraints
     __table_args__ = (
         CheckConstraint(
-            sqltext=CHECK_CUSTOM_RATING,
-            name="check_custom_rating",
+            sqltext=CHECK_USER_RATING,
+            name="check_user_rating",
         ),
     )
     # relationships (one-to-one)
