@@ -6,6 +6,7 @@ from apps.programs.models.further_tracks import FurtherTrack
 from apps.programs.models.peers import Peer
 from apps.programs.models.program_statistics import ProgramStatistics
 from apps.programs.models.programs import Program
+from apps.programs.models.regions import Region
 from apps.programs.models.states import State
 from apps.programs.models.stats_tracks import StatsTrack
 
@@ -18,6 +19,7 @@ __all__ = (
     "Peer",
     "Program",
     "ProgramStatistics",
+    "Region",
     "State",
     "StatsTrack",
 )

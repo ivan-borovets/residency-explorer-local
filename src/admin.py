@@ -9,6 +9,7 @@ from apps.programs.views.further_tracks import further_tracks_view
 from apps.programs.views.peers import peers_view
 from apps.programs.views.program_statistics import program_statistics_view
 from apps.programs.views.programs import programs_view
+from apps.programs.views.regions import regions_view
 from apps.programs.views.states import states_view
 from core.databases.helper import db_helper
 
@@ -24,6 +25,7 @@ admin.add_view(
     DropDown(
         label="Predefined",
         views=[
+            regions_view,
             states_view,
             further_tracks_view,
         ],
