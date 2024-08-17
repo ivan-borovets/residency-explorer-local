@@ -33,3 +33,4 @@ programs_view = ProgramsView(
 # in-place modification
 fields_dict = {field.name: field for field in programs_view.fields}
 fields_dict["state"].required = True
+fields_dict["user_rating"].label = "Rating (1-5)"

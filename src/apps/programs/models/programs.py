@@ -32,7 +32,7 @@ class Program(AutoTableNameMixin, IntIdPkMixin, Base):
         index=True,
     )
     # optional
-    custom_rating: Mapped[int | None] = mapped_column()
+    user_rating: Mapped[int | None] = mapped_column()
     # constraints
     __table_args__ = (
         CheckConstraint(

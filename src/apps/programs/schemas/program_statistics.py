@@ -15,8 +15,8 @@ class ProgramStatisticsIn(BaseModel):
     # required
     program: Program
     percentage_non_us_img: Decimal = Field(ge=0, le=100)
-    further_tracks: list[FurtherTrack]
     # optional
+    further_tracks: list[FurtherTrack] | None
     percentage_applicants_interviewed: Decimal | None
     internship_available: bool | None
     more_than_two_russians_interviewed: bool | None
@@ -32,14 +32,6 @@ class ProgramStatisticsIn(BaseModel):
             raise ValueError(
                 "percentage_applicants_interviewed must be between 0 and 100"
             )
-        return value
-
-    # noinspection PyNestedDecorators
-    @field_validator("further_tracks")
-    @classmethod
-    def check_non_empty(cls, value):
-        if not value:
-            raise ValueError("further_tracks must be a non-empty list")
         return value
 
     # noinspection PyNestedDecorators

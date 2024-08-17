@@ -15,12 +15,12 @@ class ProgramIn(BaseModel):
     city: str = Field(min_length=STR_MIN_LEN)
     state: State
     # optional
-    custom_rating: int | None
+    user_rating: int | None
 
     # noinspection PyNestedDecorators
-    @field_validator("custom_rating")
+    @field_validator("user_rating")
     @classmethod
-    def check_custom_rating(cls, value: int | None) -> int | None:
+    def check_user_rating(cls, value: int | None) -> int | None:
         if value is not None and not 1 <= value <= 5:
             raise ValueError("custom_rating must be an integer between 1 and 5")
         return value
