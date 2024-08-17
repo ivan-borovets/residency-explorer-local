@@ -17,3 +17,7 @@ programs_view = ProgramsView(
     pydantic_model=ProgramIn,
     label="Programs",
 )
+
+# in-place modification
+fields_dict = {field.name: field for field in programs_view.fields}
+fields_dict["state"].required = True

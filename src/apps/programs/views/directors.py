@@ -17,3 +17,7 @@ directors_view = DirectorsView(
     pydantic_model=DirectorIn,
     label="Directors",
 )
+
+# in-place modification
+fields_dict = {field.name: field for field in directors_view.fields}
+fields_dict["program"].required = True

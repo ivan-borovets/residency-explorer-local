@@ -8,3 +8,8 @@ program_statistics_view = ModelView(
     pydantic_model=ProgramStatisticsIn,
     label="Program Statistics",
 )
+
+# in-place modification
+fields_dict = {field.name: field for field in program_statistics_view.fields}
+fields_dict["program"].required = True
+fields_dict["further_tracks"].required = True

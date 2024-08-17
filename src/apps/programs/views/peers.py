@@ -8,3 +8,7 @@ peers_view = ModelView(
     pydantic_model=PeerIn,
     label="Directors' Peers",
 )
+
+# in-place modification
+fields_dict = {field.name: field for field in peers_view.fields}
+fields_dict["directors"].required = True
