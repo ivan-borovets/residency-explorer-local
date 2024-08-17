@@ -13,6 +13,7 @@ class FurtherTrack(AutoTableNameMixin, IntIdPkMixin, Base):
     # required
     title: Mapped[str] = mapped_column(
         nullable=False,
+        unique=True,
         index=True,
     )
     # relationships (many-to-many)

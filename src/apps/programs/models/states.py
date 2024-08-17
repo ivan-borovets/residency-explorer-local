@@ -13,6 +13,7 @@ class State(AutoTableNameMixin, IntIdPkMixin, Base):
     # required
     title: Mapped[str] = mapped_column(
         nullable=False,
+        unique=True,
         index=True,
     )
     region: Mapped[str] = mapped_column(nullable=False)
