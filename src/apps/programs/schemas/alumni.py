@@ -10,7 +10,7 @@ class AlumniIn(BaseModel):
         arbitrary_types_allowed = True
 
     # required
-    directors: Director
+    directors: list[Director]
     first_name: str = Field(min_length=STR_MIN_LEN)
     last_name: str = Field(min_length=STR_MIN_LEN)
     contact_info: str = Field(min_length=STR_MIN_LEN)
@@ -27,4 +27,12 @@ class AlumniIn(BaseModel):
             raise ValueError(
                 f"work_location must be at least {STR_MIN_LEN} characters long"
             )
+        return value
+
+    # noinspection PyNestedDecorators
+    @field_validator("directors")
+    @classmethod
+    def check_directors(cls, value: list[Director]) -> list[Director]:
+        if not value:
+            raise ValueError("Alumnus must have at least one director.")
         return value

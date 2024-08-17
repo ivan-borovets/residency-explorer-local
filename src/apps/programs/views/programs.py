@@ -6,7 +6,7 @@ from starlette_admin.contrib.sqla.ext.pydantic import ModelView
 
 from apps.programs.models.programs import Program
 from apps.programs.schemas.programs import ProgramIn
-from apps.programs.views.error_handlers.integrity import handle_integrity_error
+from apps.programs.views.error_handlers.integrity import handle_unique_violation
 
 
 class ProgramsView(ModelView):
@@ -14,12 +14,16 @@ class ProgramsView(ModelView):
         Program.director,
         Program.statistics,
     ]
+    exclude_fields_from_edit = [
+        Program.director,
+        Program.statistics,
+    ]
 
-    @handle_integrity_error(schema=ProgramIn)
+    @handle_unique_violation(schema=ProgramIn)
     async def create(self, request: Request, data: Dict[str, Any]) -> Any:
         return await super().create(request, data)
 
-    @handle_integrity_error(schema=ProgramIn)
+    @handle_unique_violation(schema=ProgramIn)
     async def edit(self, request: Request, pk: Any, data: Dict[str, Any]) -> Any:
         return await super().edit(request, pk, data)
 
