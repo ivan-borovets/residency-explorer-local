@@ -13,6 +13,7 @@ from .error_handlers.integrity import handle_unique_violation
 class StatesView(ModelView):
     exclude_fields_from_create = [State.programs]
     exclude_fields_from_edit = [State.programs]
+    exclude_fields_from_list = [State.id]
 
     @handle_unique_violation(schema=StateIn)
     async def create(self, request: Request, data: Dict[str, Any]) -> Any:

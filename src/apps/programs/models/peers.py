@@ -1,6 +1,7 @@
 from typing import TYPE_CHECKING
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+from starlette.requests import Request
 
 from core.models import Base
 from core.models.mixins import AutoTableNameMixin, IntIdPkMixin
@@ -28,4 +29,7 @@ class Peer(AutoTableNameMixin, IntIdPkMixin, Base):
     )
 
     def __repr__(self) -> str:
-        return f"<Peer(id={self.id}, name={self.first_name} {self.last_name}')>"
+        return f"<Peer(id={self.id}, name={self.first_name} {self.last_name})>"
+
+    async def __admin_repr__(self, request: Request):
+        return f"{self.first_name} {self.last_name}"

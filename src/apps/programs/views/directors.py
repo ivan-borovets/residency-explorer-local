@@ -18,6 +18,7 @@ class DirectorsView(ModelView):
         Director.alumni,
         Director.peers,
     ]
+    exclude_fields_from_list = [Director.id]
 
     @handle_not_null_violation(schema=DirectorIn)
     async def create(self, request: Request, data: Dict[str, Any]) -> Any:

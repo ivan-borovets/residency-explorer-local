@@ -18,4 +18,4 @@ class StatsTrack(Base):
     )
 
     def __repr__(self) -> str:
-        return f"<StatsTrack(stat_id={self.stat_id}, track_id={self.track_id}')>"
+        return f"<StatsTrack(stat_id={self.stat_id}, track_id={self.track_id})>"

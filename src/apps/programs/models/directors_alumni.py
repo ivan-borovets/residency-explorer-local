@@ -20,5 +20,5 @@ class DirectorsAlumnus(Base):
     def __repr__(self) -> str:
         return (
             f"<DirectorsAlumnus(director_id={self.director_id}, "
-            f"peer_id={self.alumni_id}')>"
+            f"peer_id={self.alumni_id})>"
         )

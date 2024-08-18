@@ -18,5 +18,5 @@ class DirectorsPeer(AutoTableNameMixin, Base):
 
     def __repr__(self) -> str:
         return (
-            f"<DirectorsPeer(director_id={self.director_id}, peer_id={self.peer_id}')>"
+            f"<DirectorsPeer(director_id={self.director_id}, peer_id={self.peer_id})>"
         )

@@ -1,9 +1,15 @@
+# mypy: disable-error-code="list-item"
 from starlette_admin.contrib.sqla.ext.pydantic import ModelView
 
 from apps.programs.models.alumni import Alumnus
 from apps.programs.schemas.alumni import AlumniIn
 
-alumni_view = ModelView(
+
+class AlumniView(ModelView):
+    exclude_fields_from_list = [Alumnus.id]
+
+
+alumni_view = AlumniView(
     model=Alumnus,
     pydantic_model=AlumniIn,
     label="Directors' Alumni",

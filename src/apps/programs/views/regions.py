@@ -13,6 +13,7 @@ from .error_handlers.integrity import handle_unique_violation
 class RegionsView(ModelView):
     exclude_fields_from_create = [Region.states]
     exclude_fields_from_edit = [Region.states]
+    exclude_fields_from_list = [Region.id]
 
     @handle_unique_violation(schema=RegionIn)
     async def create(self, request: Request, data: Dict[str, Any]) -> Any:

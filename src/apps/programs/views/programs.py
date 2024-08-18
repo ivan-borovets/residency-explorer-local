@@ -18,6 +18,7 @@ class ProgramsView(ModelView):
         Program.director,
         Program.statistics,
     ]
+    exclude_fields_from_list = [Program.id]
 
     @handle_unique_violation(schema=ProgramIn)
     async def create(self, request: Request, data: Dict[str, Any]) -> Any:

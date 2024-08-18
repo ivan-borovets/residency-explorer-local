@@ -2,6 +2,7 @@ from typing import TYPE_CHECKING
 
 from sqlalchemy import CheckConstraint, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+from starlette.requests import Request
 
 from core.models import Base
 from core.models.mixins import AutoTableNameMixin, IntIdPkMixin
@@ -51,4 +52,7 @@ class Program(AutoTableNameMixin, IntIdPkMixin, Base):
     state: Mapped["State"] = relationship(back_populates="programs")
 
     def __repr__(self) -> str:
-        return f"<Program(id={self.id}, code={self.code}, title='{self.title}')>"
+        return f"<Program(id={self.id}, code={self.code}, title={self.title})>"
+
+    async def __admin_repr__(self, request: Request):
+        return f"{self.title}"

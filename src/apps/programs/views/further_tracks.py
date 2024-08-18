@@ -12,6 +12,7 @@ from apps.programs.views.error_handlers.integrity import handle_unique_violation
 class FurtherTracksView(ModelView):
     exclude_fields_from_create = [FurtherTrack.statistics]
     exclude_fields_from_edit = [FurtherTrack.statistics]
+    exclude_fields_from_list = [FurtherTrack.id]
 
     @handle_unique_violation(schema=FurtherTrackIn)
     async def create(self, request: Request, data: Dict[str, Any]) -> Any:

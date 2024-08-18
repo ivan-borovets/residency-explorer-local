@@ -1,3 +1,4 @@
+# mypy: disable-error-code="list-item"
 from typing import Any, Dict
 
 from starlette.requests import Request
@@ -9,6 +10,8 @@ from apps.programs.views.error_handlers.integrity import handle_not_null_violati
 
 
 class ProgramStatisticsView(ModelView):
+    exclude_fields_from_list = [ProgramStatistics.id]
+
     @handle_not_null_violation(schema=ProgramStatisticsIn)
     async def create(self, request: Request, data: Dict[str, Any]) -> Any:
         return await super().create(request, data)
