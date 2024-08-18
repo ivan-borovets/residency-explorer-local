@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 from sqlalchemy.orm import Session
 
+from apps.programs.models.regions import Region
 from apps.programs.models.states import State
 
 
@@ -116,12 +117,14 @@ regions_data = (
 )
 
 
-def prepopulate_states(session: Session):
+def prepopulate_regions_and_states(session: Session):
+    regions = []
     for region_data in regions_data:
-        for state_data in region_data.states:
-            state = State(
-                title=state_data.title,
-                region=region_data.title,
-            )
-            session.add(state)
+        region = Region(title=region_data.title)
+        region.states = [
+            State(title=state_data.title) for state_data in region_data.states
+        ]
+        regions.append(region)
+
+    session.add_all(regions)
     session.commit()
