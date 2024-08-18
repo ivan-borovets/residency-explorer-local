@@ -1,9 +1,10 @@
-# mypy: disable-error-code="list-item"
 from typing import Any, Dict
 
 from starlette.requests import Request
+from starlette_admin import HasMany, IntegerField, StringField
 from starlette_admin.contrib.sqla.ext.pydantic import ModelView
 
+from apps.programs.constants import STR_MIN_LEN
 from apps.programs.models.regions import Region
 from apps.programs.schemas.regions import RegionIn
 
@@ -11,9 +12,33 @@ from .error_handlers.integrity import handle_unique_violation
 
 
 class RegionsView(ModelView):
-    exclude_fields_from_create = [Region.states]
-    exclude_fields_from_edit = [Region.states]
-    exclude_fields_from_list = [Region.id]
+    fields = [
+        IntegerField(
+            # BaseField
+            name="id",
+            label="Id",
+            exclude_from_list=True,
+            exclude_from_detail=True,
+        ),
+        StringField(
+            # BaseField
+            name="title",
+            label="Title",
+            required=True,
+            # StringField
+            minlength=STR_MIN_LEN,
+            placeholder="Mountain",
+        ),
+        HasMany(
+            # BaseField
+            name="states",
+            label="States",
+            exclude_from_create=True,
+            exclude_from_edit=True,
+            # RelationField
+            identity="state",
+        ),
+    ]
 
     @handle_unique_violation(schema=RegionIn)
     async def create(self, request: Request, data: Dict[str, Any]) -> Any:

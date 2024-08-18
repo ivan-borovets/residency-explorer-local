@@ -1,8 +1,7 @@
 from pydantic import BaseModel, Field, field_validator
 
+from apps.programs.constants import STR_MIN_LEN
 from apps.programs.models.states import State
-
-from .constants.constants import STR_MIN_LEN
 
 
 class ProgramIn(BaseModel):
@@ -22,5 +21,5 @@ class ProgramIn(BaseModel):
     @classmethod
     def check_user_rating(cls, value: int | None) -> int | None:
         if value is not None and not 1 <= value <= 5:
-            raise ValueError("custom_rating must be an integer between 1 and 5")
+            raise ValueError("user_rating must be an integer between 1 and 5")
         return value

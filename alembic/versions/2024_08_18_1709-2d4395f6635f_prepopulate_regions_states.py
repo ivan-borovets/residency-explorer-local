@@ -8,10 +8,10 @@ Create Date: 2024-08-18 17:09:41.226841
 
 from typing import Sequence, Union
 
-from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.orm import Session
 
+from alembic import op
 from apps.programs.data.prepopulate_further_tracks import prepopulate_further_tracks
 from apps.programs.data.prepopulate_regions_states import prepopulate_regions_and_states
 
@@ -36,13 +36,4 @@ def upgrade() -> None:
 
 
 def downgrade() -> None:
-    bind = op.get_bind()
-    session = Session(bind=bind)
-
-    try:
-        session.execute(sa.text("DELETE FROM further_tracks"))
-        session.execute(sa.text("DELETE FROM states"))
-        session.execute(sa.text("DELETE FROM regions"))
-        session.commit()
-    finally:
-        session.close()
+    pass

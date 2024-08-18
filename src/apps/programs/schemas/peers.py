@@ -1,8 +1,7 @@
 from pydantic import BaseModel, Field, field_validator
 
+from apps.programs.constants import STR_MIN_LEN
 from apps.programs.models.directors import Director
-
-from .constants.constants import STR_MIN_LEN
 
 
 class PeerIn(BaseModel):

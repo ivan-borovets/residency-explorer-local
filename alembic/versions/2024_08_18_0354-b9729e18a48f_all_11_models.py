@@ -8,9 +8,9 @@ Create Date: 2024-08-18 03:54:50.746750
 
 from typing import Sequence, Union
 
-from alembic import op
 import sqlalchemy as sa
 
+from alembic import op
 
 # revision identifiers, used by Alembic.
 revision: str = "b9729e18a48f"
@@ -33,9 +33,7 @@ def upgrade() -> None:
     op.create_index(
         op.f("ix_alumni_first_name"), "alumni", ["first_name"], unique=False
     )
-    op.create_index(
-        op.f("ix_alumni_last_name"), "alumni", ["last_name"], unique=False
-    )
+    op.create_index(op.f("ix_alumni_last_name"), "alumni", ["last_name"], unique=False)
     op.create_table(
         "further_tracks",
         sa.Column("title", sa.String(), nullable=False),
@@ -57,21 +55,15 @@ def upgrade() -> None:
         sa.Column("id", sa.Integer(), nullable=False),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_peers")),
     )
-    op.create_index(
-        op.f("ix_peers_first_name"), "peers", ["first_name"], unique=False
-    )
-    op.create_index(
-        op.f("ix_peers_last_name"), "peers", ["last_name"], unique=False
-    )
+    op.create_index(op.f("ix_peers_first_name"), "peers", ["first_name"], unique=False)
+    op.create_index(op.f("ix_peers_last_name"), "peers", ["last_name"], unique=False)
     op.create_table(
         "regions",
         sa.Column("title", sa.String(), nullable=False),
         sa.Column("id", sa.Integer(), nullable=False),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_regions")),
     )
-    op.create_index(
-        op.f("ix_regions_title"), "regions", ["title"], unique=True
-    )
+    op.create_index(op.f("ix_regions_title"), "regions", ["title"], unique=True)
     op.create_table(
         "states",
         sa.Column("title", sa.String(), nullable=False),
@@ -84,9 +76,7 @@ def upgrade() -> None:
         ),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_states")),
     )
-    op.create_index(
-        op.f("ix_states_region_id"), "states", ["region_id"], unique=False
-    )
+    op.create_index(op.f("ix_states_region_id"), "states", ["region_id"], unique=False)
     op.create_index(op.f("ix_states_title"), "states", ["title"], unique=True)
     op.create_table(
         "programs",
@@ -107,9 +97,7 @@ def upgrade() -> None:
         ),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_programs")),
     )
-    op.create_index(
-        op.f("ix_programs_code"), "programs", ["code"], unique=True
-    )
+    op.create_index(op.f("ix_programs_code"), "programs", ["code"], unique=True)
     op.create_index(
         op.f("ix_programs_state_id"), "programs", ["state_id"], unique=False
     )
@@ -152,20 +140,14 @@ def upgrade() -> None:
         "program_statistics",
         sa.Column("percentage_non_us_img", sa.Numeric(), nullable=False),
         sa.Column("program_id", sa.Integer(), nullable=False),
-        sa.Column(
-            "percentage_applicants_interviewed", sa.Numeric(), nullable=True
-        ),
+        sa.Column("percentage_applicants_interviewed", sa.Numeric(), nullable=True),
         sa.Column("internship_available", sa.Boolean(), nullable=True),
-        sa.Column(
-            "more_than_two_russians_interviewed", sa.Boolean(), nullable=True
-        ),
+        sa.Column("more_than_two_russians_interviewed", sa.Boolean(), nullable=True),
         sa.Column("additional_info", sa.String(), nullable=True),
         sa.Column("id", sa.Integer(), nullable=False),
         sa.CheckConstraint(
             "(percentage_applicants_interviewed >= 0 AND percentage_applicants_interviewed <= 100)",
-            name=op.f(
-                "ck_program_statistics_check_percentage_applicants_interviewed"
-            ),
+            name=op.f("ck_program_statistics_check_percentage_applicants_interviewed"),
         ),
         sa.CheckConstraint(
             "(percentage_non_us_img >= 0 AND percentage_non_us_img <= 100)",
@@ -228,9 +210,7 @@ def upgrade() -> None:
             ["further_tracks.id"],
             name=op.f("fk_stats_tracks_track_id_further_tracks"),
         ),
-        sa.PrimaryKeyConstraint(
-            "stat_id", "track_id", name=op.f("pk_stats_tracks")
-        ),
+        sa.PrimaryKeyConstraint("stat_id", "track_id", name=op.f("pk_stats_tracks")),
     )
     # ### end Alembic commands ###
 

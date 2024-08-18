@@ -2,10 +2,9 @@ from decimal import Decimal
 
 from pydantic import BaseModel, Field, field_validator
 
+from apps.programs.constants import STR_MIN_LEN
 from apps.programs.models.further_tracks import FurtherTrack
 from apps.programs.models.programs import Program
-
-from .constants.constants import STR_MIN_LEN
 
 
 class ProgramStatisticsIn(BaseModel):

@@ -1,12 +1,68 @@
-# mypy: disable-error-code="list-item"
+from starlette_admin import HasMany, IntegerField, StringField
 from starlette_admin.contrib.sqla.ext.pydantic import ModelView
 
+from apps.programs.constants import STR_MIN_LEN
 from apps.programs.models.alumni import Alumnus
 from apps.programs.schemas.alumni import AlumniIn
 
 
 class AlumniView(ModelView):
-    exclude_fields_from_list = [Alumnus.id]
+    fields = [
+        IntegerField(
+            # BaseField
+            name="id",
+            label="Id",
+            exclude_from_list=True,
+            exclude_from_detail=True,
+        ),
+        StringField(
+            # BaseField
+            name="first_name",
+            label="First name",
+            required=True,
+            # StringField
+            minlength=STR_MIN_LEN,
+            placeholder="John",
+        ),
+        StringField(
+            # BaseField
+            name="last_name",
+            label="Last name",
+            required=True,
+            # StringField
+            minlength=STR_MIN_LEN,
+            placeholder="Doe",
+        ),
+        StringField(
+            # BaseField
+            name="contact_info",
+            label="Contact info",
+            required=True,
+            # StringField
+            minlength=STR_MIN_LEN,
+            placeholder="+1 (555) 123-4567, "
+            "john.doe@example.com, "
+            "123 Main St, Springfield, IL",
+        ),
+        StringField(
+            # BaseField
+            name="work_location",
+            label="Work location",
+            # StringField
+            minlength=STR_MIN_LEN,
+            placeholder="St. Mary's Hospital, "
+            "Cardiology Department, "
+            "New York, NY",
+        ),
+        HasMany(
+            # BaseField
+            name="directors",
+            label="Directors",
+            required=True,
+            # RelationField
+            identity="director",
+        ),
+    ]
 
 
 alumni_view = AlumniView(
@@ -14,7 +70,3 @@ alumni_view = AlumniView(
     pydantic_model=AlumniIn,
     label="Directors' Alumni",
 )
-
-# in-place modification
-fields_dict = {field.name: field for field in alumni_view.fields}
-fields_dict["directors"].required = True
