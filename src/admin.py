@@ -7,6 +7,7 @@ from apps.programs.views.alumni import alumni_view
 from apps.programs.views.directors import directors_view
 from apps.programs.views.further_tracks import further_tracks_view
 from apps.programs.views.peers import peers_view
+from apps.programs.views.pg_views.program import program_pg_view_view
 from apps.programs.views.program_statistics import program_statistics_view
 from apps.programs.views.programs import programs_view
 from apps.programs.views.regions import regions_view
@@ -39,6 +40,7 @@ primary_views = (
     directors_view,
     peers_view,
     alumni_view,
+    program_pg_view_view,
 )
 
 for view in primary_views:

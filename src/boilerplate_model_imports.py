@@ -4,6 +4,7 @@ from apps.programs.models.directors_alumni import DirectorsAlumnus
 from apps.programs.models.directors_peers import DirectorsPeer
 from apps.programs.models.further_tracks import FurtherTrack
 from apps.programs.models.peers import Peer
+from apps.programs.models.pg_views.program import ProgramPgView
 from apps.programs.models.program_statistics import ProgramStatistics
 from apps.programs.models.programs import Program
 from apps.programs.models.regions import Region
@@ -17,8 +18,9 @@ __all__ = (
     "DirectorsPeer",
     "FurtherTrack",
     "Peer",
-    "Program",
+    "ProgramPgView",
     "ProgramStatistics",
+    "Program",
     "Region",
     "State",
     "StatsTrack",
