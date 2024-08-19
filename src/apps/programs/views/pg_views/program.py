@@ -1,3 +1,4 @@
+from starlette.requests import Request
 from starlette_admin import BooleanField, DecimalField, IntegerField, StringField
 from starlette_admin.contrib.sqla import ModelView
 
@@ -19,7 +20,23 @@ class ProgramPgViewView(ModelView):
         StringField(name="d_name", label="D. Name"),
         StringField(name="d_specialty", label="D. Specialty"),
         StringField(name="d_home_country", label="D. Home Country"),
+        StringField(name="further_tracks", label="Further Tracks"),
     ]
+
+    # BaseModelView
+    def can_create(self, request: Request) -> bool:
+        """Permission for creating new Items. Return True by default"""
+        return False
+
+    # BaseModelView
+    def can_edit(self, request: Request) -> bool:
+        """Permission for editing Items. Return True by default"""
+        return False
+
+    # BaseModelView
+    def can_delete(self, request: Request) -> bool:
+        """Permission for deleting Items. Return True by default"""
+        return False
 
 
 program_pg_view_view = ProgramPgViewView(

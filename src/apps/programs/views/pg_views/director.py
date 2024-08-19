@@ -1,3 +1,4 @@
+from starlette.requests import Request
 from starlette_admin import IntegerField, StringField
 from starlette_admin.contrib.sqla import ModelView
 
@@ -15,6 +16,21 @@ class DirectorPgViewView(ModelView):
         IntegerField(name="n_peers", label="N Peers"),
         IntegerField(name="n_alumni", label="N Alumni"),
     ]
+
+    # BaseModelView
+    def can_create(self, request: Request) -> bool:
+        """Permission for creating new Items. Return True by default"""
+        return False
+
+    # BaseModelView
+    def can_edit(self, request: Request) -> bool:
+        """Permission for editing Items. Return True by default"""
+        return False
+
+    # BaseModelView
+    def can_delete(self, request: Request) -> bool:
+        """Permission for deleting Items. Return True by default"""
+        return False
 
 
 director_pg_view_view = DirectorPgViewView(

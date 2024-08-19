@@ -53,6 +53,9 @@ class ProgramPgView(Base):
     d_home_country: Mapped[str | None] = mapped_column(
         name="D. Home Country",
     )
+    further_tracks: Mapped[str | None] = mapped_column(
+        name="Further Tracks",
+    )
 
     def __repr__(self) -> str:
         return f"<ProgramPGView(code={self.code})>"

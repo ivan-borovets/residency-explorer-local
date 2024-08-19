@@ -38,7 +38,8 @@ def upgrade() -> None:
             ps.more_than_two_russians_interviewed AS ">2 Rus. Int.",
             d.first_name || ' ' || d.last_name AS "D. Name",
             d.specialty AS "D. Specialty",
-            d.home_country AS "D. Home Country"
+            d.home_country AS "D. Home Country",
+            STRING_AGG(ft.title, ', ') AS "Further Tracks"
         FROM
             programs p
         LEFT JOIN
@@ -48,7 +49,16 @@ def upgrade() -> None:
         LEFT JOIN
             program_statistics ps ON ps.program_id = p.id
         LEFT JOIN
-            directors d ON d.program_id = p.id;
+            directors d ON d.program_id = p.id
+        LEFT JOIN
+            stats_tracks st ON st.stat_id = ps.id
+        LEFT JOIN
+            further_tracks ft ON ft.id = st.track_id
+        GROUP BY
+            p.code, p.title, p.city, s.title, r.title, p.user_rating,
+            ps.percentage_non_us_img, ps.percentage_applicants_interviewed,
+            ps.internship_available, ps.more_than_two_russians_interviewed,
+            d.first_name, d.last_name, d.specialty, d.home_country;
     """
     )
     op.execute(view_creation_sql)

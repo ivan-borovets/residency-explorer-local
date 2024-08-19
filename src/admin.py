@@ -23,6 +23,14 @@ admin = Admin(
     base_url="/",
 )
 
+overviews = (
+    program_pg_view_view,
+    director_pg_view_view,
+)
+
+for overview in overviews:
+    admin.add_view(overview)
+
 admin.add_view(
     DropDown(
         label="Predefined",
@@ -41,8 +49,6 @@ primary_views = (
     directors_view,
     peers_view,
     alumni_view,
-    program_pg_view_view,
-    director_pg_view_view,
 )
 
 for view in primary_views:
