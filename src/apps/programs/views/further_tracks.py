@@ -1,7 +1,7 @@
 from typing import Any, Dict, List, Optional, Sequence, Union
 
 from starlette.requests import Request
-from starlette_admin import HasMany, IntegerField, StringField
+from starlette_admin import ExportType, HasMany, IntegerField, StringField
 from starlette_admin.contrib.sqla.ext.pydantic import ModelView
 
 from apps.programs.constants import STR_MIN_LEN
@@ -41,6 +41,13 @@ class FurtherTracksView(ModelView):
 
     # initial order
     fields_default_sort = ["id"]  # ascending
+
+    export_types = [
+        ExportType.CSV,
+        ExportType.EXCEL,
+        ExportType.PDF,
+        ExportType.PRINT,
+    ]
 
     # overridden for dropdown list sorting in forms
     async def find_all(

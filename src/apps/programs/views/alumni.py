@@ -1,4 +1,4 @@
-from starlette_admin import HasMany, IntegerField, StringField
+from starlette_admin import ExportType, HasMany, IntegerField, StringField
 from starlette_admin.contrib.sqla.ext.pydantic import ModelView
 
 from apps.programs.constants import STR_MIN_LEN
@@ -66,6 +66,13 @@ class AlumniView(ModelView):
 
     # initial order
     fields_default_sort = ["first_name"]  # ascending
+
+    export_types = [
+        ExportType.CSV,
+        ExportType.EXCEL,
+        ExportType.PDF,
+        ExportType.PRINT,
+    ]
 
 
 alumni_view = AlumniView(

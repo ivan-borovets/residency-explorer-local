@@ -1,5 +1,11 @@
 from starlette.requests import Request
-from starlette_admin import BooleanField, DecimalField, IntegerField, StringField
+from starlette_admin import (
+    BooleanField,
+    DecimalField,
+    ExportType,
+    IntegerField,
+    StringField,
+)
 from starlette_admin.contrib.sqla import ModelView
 
 from apps.programs.models.pg_views.program import ProgramPgView
@@ -25,6 +31,13 @@ class ProgramPgViewView(ModelView):
 
     # initial order
     fields_default_sort = ["code"]  # ascending
+
+    export_types = [
+        ExportType.CSV,
+        ExportType.EXCEL,
+        ExportType.PDF,
+        ExportType.PRINT,
+    ]
 
     # BaseModelView
     def can_create(self, request: Request) -> bool:

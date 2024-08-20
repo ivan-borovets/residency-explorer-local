@@ -4,6 +4,7 @@ from starlette.requests import Request
 from starlette_admin import (
     BooleanField,
     DecimalField,
+    ExportType,
     HasMany,
     HasOne,
     IntegerField,
@@ -78,6 +79,13 @@ class ProgramStatisticsView(ModelView):
     fields_default_sort = [
         ("percentage_non_us_img", True),  # descending
         ("percentage_applicants_interviewed", True),
+    ]
+
+    export_types = [
+        ExportType.CSV,
+        ExportType.EXCEL,
+        ExportType.PDF,
+        ExportType.PRINT,
     ]
 
     @handle_not_null_violation(schema=ProgramStatisticsIn)

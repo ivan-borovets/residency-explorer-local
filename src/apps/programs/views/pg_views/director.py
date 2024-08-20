@@ -1,5 +1,5 @@
 from starlette.requests import Request
-from starlette_admin import IntegerField, StringField
+from starlette_admin import ExportType, IntegerField, StringField
 from starlette_admin.contrib.sqla import ModelView
 
 from apps.programs.models.pg_views.director import DirectorPgView
@@ -19,6 +19,13 @@ class DirectorPgViewView(ModelView):
 
     # initial order
     fields_default_sort = ["name"]  # ascending
+
+    export_types = [
+        ExportType.CSV,
+        ExportType.EXCEL,
+        ExportType.PDF,
+        ExportType.PRINT,
+    ]
 
     # BaseModelView
     def can_create(self, request: Request) -> bool:
