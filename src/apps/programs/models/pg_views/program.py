@@ -29,6 +29,10 @@ class ProgramPgView(Base):
         nullable=False,
         name="Region",
     )
+    major: Mapped[str] = mapped_column(
+        nullable=False,
+        name="Major",
+    )
     rating: Mapped[int | None] = mapped_column(
         name="Rating",
     )
@@ -44,6 +48,15 @@ class ProgramPgView(Base):
     more_than_two_russians_interviewed: Mapped[bool | None] = mapped_column(
         name=">2 Rus. Int.",
     )
+    further_tracks: Mapped[str | None] = mapped_column(
+        name="Further Tracks",
+    )
+    contact_info: Mapped[str | None] = mapped_column(
+        name="Contact",
+    )
+    additional_info: Mapped[str | None] = mapped_column(
+        name="Info",
+    )
     d_name: Mapped[str | None] = mapped_column(
         name="D. Name",
     )
@@ -52,9 +65,6 @@ class ProgramPgView(Base):
     )
     d_home_country: Mapped[str | None] = mapped_column(
         name="D. Home Country",
-    )
-    further_tracks: Mapped[str | None] = mapped_column(
-        name="Further Tracks",
     )
 
     def __repr__(self) -> str:

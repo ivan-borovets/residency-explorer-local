@@ -18,15 +18,18 @@ class ProgramPgViewView(ModelView):
         StringField(name="city", label="City"),
         StringField(name="state", label="State"),
         StringField(name="region", label="Region"),
+        StringField(name="major", label="Major"),
         IntegerField(name="rating", label="Rating"),
         DecimalField(name="percentage_non_us", label="% Non-US"),
         DecimalField(name="percentage_applicants_interviewed", label="% Appl. Int."),
         BooleanField(name="internship", label="Internship"),
         BooleanField(name="more_than_two_russians_interviewed", label=">2 Rus. Int."),
+        StringField(name="further_tracks", label="Further Tracks"),
+        StringField(name="contact_info", label="Contact"),
+        StringField(name="additional_info", label="Info"),
         StringField(name="d_name", label="D. Name"),
         StringField(name="d_specialty", label="D. Specialty"),
         StringField(name="d_home_country", label="D. Home Country"),
-        StringField(name="further_tracks", label="Further Tracks"),
     ]
 
     # initial order
