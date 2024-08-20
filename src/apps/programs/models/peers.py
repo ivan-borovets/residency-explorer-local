@@ -22,6 +22,8 @@ class Peer(AutoTableNameMixin, IntIdPkMixin, Base):
     )
     contact_info: Mapped[str] = mapped_column(nullable=False)
     position: Mapped[str] = mapped_column(nullable=False)
+    # optional
+    additional_info: Mapped[str | None] = mapped_column()
     # relationships (many-to-many)
     directors: Mapped[list["Director"]] = relationship(
         secondary="directors_peers",

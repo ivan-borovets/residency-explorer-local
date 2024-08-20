@@ -25,6 +25,7 @@ class Alumnus(IntIdPkMixin, Base):
     contact_info: Mapped[str] = mapped_column(nullable=False)
     # optional
     work_location: Mapped[str | None] = mapped_column()
+    additional_info: Mapped[str | None] = mapped_column()
     # relationships (many-to-many)
     directors: Mapped[list["Director"]] = relationship(
         secondary="directors_alumni",

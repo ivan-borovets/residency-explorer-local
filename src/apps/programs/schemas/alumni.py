@@ -15,6 +15,7 @@ class AlumniIn(BaseModel):
     contact_info: str = Field(min_length=STR_MIN_LEN)
     # optional
     work_location: str | None
+    additional_info: str | None
 
     # noinspection PyNestedDecorators
     @field_validator("work_location")

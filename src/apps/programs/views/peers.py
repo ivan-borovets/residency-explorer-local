@@ -1,4 +1,10 @@
-from starlette_admin import ExportType, HasMany, IntegerField, StringField
+from starlette_admin import (
+    ExportType,
+    HasMany,
+    IntegerField,
+    StringField,
+    TextAreaField,
+)
 from starlette_admin.contrib.sqla.ext.pydantic import ModelView
 
 from apps.programs.constants import STR_MIN_LEN
@@ -60,6 +66,14 @@ class PeersView(ModelView):
             required=True,
             # RelationField
             identity="director",
+        ),
+        TextAreaField(
+            # BaseField
+            name="additional_info",
+            label="Additional info",
+            # StringField
+            minlength=STR_MIN_LEN,
+            placeholder="The peer who loves cats",
         ),
     ]
 

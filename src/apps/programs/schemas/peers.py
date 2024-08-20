@@ -14,6 +14,8 @@ class PeerIn(BaseModel):
     last_name: str = Field(min_length=STR_MIN_LEN)
     contact_info: str = Field(min_length=STR_MIN_LEN)
     position: str = Field(min_length=STR_MIN_LEN)
+    # optional
+    additional_info: str | None
 
     # noinspection PyNestedDecorators
     @field_validator("directors")

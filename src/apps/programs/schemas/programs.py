@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field, field_validator
 
 from apps.programs.constants import STR_MIN_LEN
+from apps.programs.models.majors import Major
 from apps.programs.models.states import State
 
 
@@ -12,9 +13,12 @@ class ProgramIn(BaseModel):
     code: str = Field(min_length=STR_MIN_LEN)
     title: str = Field(min_length=STR_MIN_LEN)
     city: str = Field(min_length=STR_MIN_LEN)
+    major: Major
     state: State
     # optional
     user_rating: int | None
+    contact_info: str | None
+    additional_info: str | None
 
     # noinspection PyNestedDecorators
     @field_validator("user_rating")

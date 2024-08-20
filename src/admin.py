@@ -6,6 +6,7 @@ import boilerplate_model_imports  # noqa: F401
 from apps.programs.views.alumni import alumni_view
 from apps.programs.views.directors import directors_view
 from apps.programs.views.further_tracks import further_tracks_view
+from apps.programs.views.majors import majors_view
 from apps.programs.views.peers import peers_view
 from apps.programs.views.pg_views.director import director_pg_view_view
 from apps.programs.views.pg_views.program import program_pg_view_view
@@ -35,6 +36,7 @@ admin.add_view(
     DropDown(
         label="Predefined",
         views=[
+            majors_view,
             regions_view,
             states_view,
             further_tracks_view,

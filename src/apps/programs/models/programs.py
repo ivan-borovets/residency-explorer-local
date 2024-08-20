@@ -9,6 +9,7 @@ from core.models.mixins import AutoTableNameMixin, IntIdPkMixin
 
 if TYPE_CHECKING:
     from .directors import Director
+    from .majors import Major
     from .program_statistics import ProgramStatistics
     from .states import State
 
@@ -25,6 +26,11 @@ class Program(AutoTableNameMixin, IntIdPkMixin, Base):
     title: Mapped[str] = mapped_column(nullable=False)
     city: Mapped[str] = mapped_column(nullable=False)
     # foreign keys
+    major_id: Mapped[int] = mapped_column(
+        ForeignKey("majors.id"),
+        nullable=False,
+        index=True,
+    )
     state_id: Mapped[int] = mapped_column(
         ForeignKey("states.id"),
         nullable=False,
@@ -32,6 +38,8 @@ class Program(AutoTableNameMixin, IntIdPkMixin, Base):
     )
     # optional
     user_rating: Mapped[int | None] = mapped_column()
+    contact_info: Mapped[str | None] = mapped_column()
+    additional_info: Mapped[str | None] = mapped_column()
     # constraints
     __table_args__ = (
         CheckConstraint(
@@ -49,6 +57,7 @@ class Program(AutoTableNameMixin, IntIdPkMixin, Base):
         uselist=False,
     )
     # relationships (many-to-one)
+    major: Mapped["Major"] = relationship(back_populates="programs")
     state: Mapped["State"] = relationship(back_populates="programs")
 
     def __repr__(self) -> str:

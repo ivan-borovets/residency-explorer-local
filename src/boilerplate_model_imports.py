@@ -3,6 +3,7 @@ from apps.programs.models.directors import Director
 from apps.programs.models.directors_alumni import DirectorsAlumnus
 from apps.programs.models.directors_peers import DirectorsPeer
 from apps.programs.models.further_tracks import FurtherTrack
+from apps.programs.models.majors import Major
 from apps.programs.models.peers import Peer
 from apps.programs.models.pg_views.director import DirectorPgView
 from apps.programs.models.pg_views.program import ProgramPgView
@@ -18,6 +19,7 @@ __all__ = (
     "DirectorsAlumnus",
     "DirectorsPeer",
     "FurtherTrack",
+    "Major",
     "Peer",
     "DirectorPgView",
     "ProgramPgView",

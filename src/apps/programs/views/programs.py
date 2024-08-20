@@ -1,7 +1,7 @@
 from typing import Any, Dict, List, Optional, Sequence, Union
 
 from starlette.requests import Request
-from starlette_admin import ExportType, HasOne, IntegerField, StringField
+from starlette_admin import ExportType, HasOne, IntegerField, StringField, TextAreaField
 from starlette_admin.contrib.sqla.ext.pydantic import ModelView
 
 from apps.programs.constants import STR_MIN_LEN
@@ -48,6 +48,14 @@ class ProgramsView(ModelView):
         ),
         HasOne(
             # BaseField
+            name="major",
+            label="Major",
+            required=True,
+            # RelationField
+            identity="major",
+        ),
+        HasOne(
+            # BaseField
             name="state",
             label="State",
             required=True,
@@ -59,6 +67,22 @@ class ProgramsView(ModelView):
             name="user_rating",
             label="My rating",
             help_text="1-5",
+        ),
+        TextAreaField(
+            # BaseField
+            name="contact_info",
+            label="Contact info",
+            # StringField
+            minlength=STR_MIN_LEN,
+            placeholder="https://www.healthiertucson.com/",
+        ),
+        TextAreaField(
+            # BaseField
+            name="additional_info",
+            label="Additional info",
+            # StringField
+            minlength=STR_MIN_LEN,
+            placeholder="Cat lovers program",
         ),
         HasOne(
             # BaseField
