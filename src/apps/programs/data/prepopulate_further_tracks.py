@@ -12,8 +12,8 @@ class FurtherTrackData:
 
 further_tracks_data = [
     FurtherTrackData(title="academic"),
-    FurtherTrackData(title="full-time"),
-    FurtherTrackData(title="residency"),
+    FurtherTrackData(title="practice"),
+    FurtherTrackData(title="fellowship"),
     FurtherTrackData(title="other"),
 ]
 
