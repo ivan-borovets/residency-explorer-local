@@ -1,18 +1,41 @@
-# No '/' after dir name !
-[structure]
-SRC_DIR = "src"
-PYPROJECT_TOML = "pyproject.toml"
-POETRY_LOCK = "poetry.lock"
+# Used by app
+# Used by docker-compose
+[run]
+UVICORN_HOST = "0.0.0.0"
+UVICORN_PORT = 8888
+UVICORN_RELOAD = false
 
-[db.postgres]
-POSTGRES_USER = "postgres"
-POSTGRES_PASSWORD = "changethis"
-POSTGRES_DB = "web_app"
-POSTGRES_HOST = "db_postgres"  # Specify as in Docker network
-POSTGRES_PORT = 5432
-
+# Used by app
 [db.sqlalchemy]
 SQLA_ECHO = false
 SQLA_ECHO_POOL = false
 SQLA_POOL_SIZE = 50
 SQLA_MAX_OVERFLOW = 10
+
+# Used by app
+# Used by docker-compose
+[db.postgres]
+# Specify as in Docker network
+POSTGRES_USER = "postgres"
+POSTGRES_PASSWORD = "changethis"
+POSTGRES_DB = "web_app_db_pg"
+# Set host to localhost for local dev
+# Don't forget to regenerate dotenv
+# Don't forget to apply alembic rev
+# Set host to web_app_db_pg for prod
+POSTGRES_HOST = "web_app_db_pg"
+POSTGRES_PORT = 5432
+
+# Used by Makefile
+# Used by Dockerfile
+# Used by docker-compose
+[structure] # No '/' after dir name !
+SRC_DIR = "src"
+CONFIG_TOML = "config.toml"
+PYPROJECT_TOML = "pyproject.toml"
+POETRY_LOCK = "poetry.lock"
+
+# Used by Makefile
+[docker-compose]
+COMPOSE_COMMAND = "docker compose"
+COMPOSE_FILE = "docker-compose.yaml"

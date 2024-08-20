@@ -51,8 +51,15 @@ class Db(SettingsModel):
     sqlalchemy: DbSqlAlchemy
 
 
+class Run(SettingsModel):
+    host: str = Field(alias="UVICORN_HOST")
+    port: int = Field(alias="UVICORN_PORT")
+    reload: bool = Field(alias="UVICORN_RELOAD")
+
+
 class Settings(SettingsModel):
     db: Db
+    run: Run
 
     @staticmethod
     def _toml_to_dict(path: Path) -> dict:
@@ -61,14 +68,12 @@ class Settings(SettingsModel):
         return toml_dict
 
     @classmethod
-    def from_file(cls, path: Path, is_docker: bool = False) -> Settings:
+    def from_file(cls, path: Path) -> Settings:
         if not path.is_file():
             raise FileNotFoundError(
                 f"The file does not exist at the specified path: {path}"
             )
         toml_dict: dict = cls._toml_to_dict(path=path)
-        if not is_docker:
-            toml_dict["db"]["postgres"]["POSTGRES_HOST"] = "localhost"
         settings_instance: Settings = cls.model_validate(toml_dict)
         return settings_instance
 

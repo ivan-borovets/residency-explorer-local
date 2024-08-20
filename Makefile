@@ -1,5 +1,4 @@
 # Makefile variables
-ROOT_PATH := $(shell pwd)
 SRC_DIR := $(shell grep 'SRC_DIR' config.toml | sed 's/.*= *//')/
 PYPROJECT_TOML := $(shell grep 'PYPROJECT_TOML' config.toml | sed 's/.*= *//')
 
