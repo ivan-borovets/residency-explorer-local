@@ -63,6 +63,9 @@ class PeersView(ModelView):
         ),
     ]
 
+    # initial order
+    fields_default_sort = ["first_name"]  # ascending
+
 
 peers_view = PeersView(
     model=Peer,

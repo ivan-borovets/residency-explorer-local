@@ -23,6 +23,9 @@ class ProgramPgViewView(ModelView):
         StringField(name="further_tracks", label="Further Tracks"),
     ]
 
+    # initial order
+    fields_default_sort = ["code"]  # ascending
+
     # BaseModelView
     def can_create(self, request: Request) -> bool:
         """Permission for creating new Items. Return True by default"""

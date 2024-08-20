@@ -17,6 +17,9 @@ class DirectorPgViewView(ModelView):
         IntegerField(name="n_alumni", label="N Alumni"),
     ]
 
+    # initial order
+    fields_default_sort = ["name"]  # ascending
+
     # BaseModelView
     def can_create(self, request: Request) -> bool:
         """Permission for creating new Items. Return True by default"""

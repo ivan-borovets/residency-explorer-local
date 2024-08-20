@@ -64,6 +64,9 @@ class AlumniView(ModelView):
         ),
     ]
 
+    # initial order
+    fields_default_sort = ["first_name"]  # ascending
+
 
 alumni_view = AlumniView(
     model=Alumnus,

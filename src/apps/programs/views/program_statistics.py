@@ -74,6 +74,12 @@ class ProgramStatisticsView(ModelView):
         ),
     ]
 
+    # initial order
+    fields_default_sort = [
+        ("percentage_non_us_img", True),  # descending
+        ("percentage_applicants_interviewed", True),
+    ]
+
     @handle_not_null_violation(schema=ProgramStatisticsIn)
     async def create(self, request: Request, data: Dict[str, Any]) -> Any:
         return await super().create(request, data)
