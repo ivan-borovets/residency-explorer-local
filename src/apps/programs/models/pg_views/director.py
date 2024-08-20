@@ -25,9 +25,6 @@ class DirectorPgView(Base):
     home_country: Mapped[str | None] = mapped_column(
         name="Home Country",
     )
-    info: Mapped[str | None] = mapped_column(
-        name="Info",
-    )
     n_peers: Mapped[int] = mapped_column(
         name="N Peers",
         nullable=False,
@@ -35,6 +32,9 @@ class DirectorPgView(Base):
     n_alumni: Mapped[int] = mapped_column(
         name="N Alumni",
         nullable=False,
+    )
+    info: Mapped[str | None] = mapped_column(
+        name="Info",
     )
 
     def __repr__(self) -> str:

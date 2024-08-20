@@ -12,9 +12,9 @@ class DirectorPgViewView(ModelView):
         StringField(name="contact", label="Contact"),
         StringField(name="specialty", label="Specialty"),
         StringField(name="home_country", label="Home Country"),
-        StringField(name="info", label="Info"),
         IntegerField(name="n_peers", label="N Peers"),
         IntegerField(name="n_alumni", label="N Alumni"),
+        StringField(name="info", label="Info"),
     ]
 
     # initial order
