@@ -56,7 +56,7 @@ class ProgramStatisticsView(ModelView):
             label="Additional info",
             # StringField
             minlength=STR_MIN_LEN,
-            placeholder="Cat lovers",
+            placeholder="Cat lovers score higher",
         ),
         HasOne(
             # BaseField

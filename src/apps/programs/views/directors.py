@@ -44,7 +44,7 @@ class DirectorsView(ModelView):
             minlength=STR_MIN_LEN,
             placeholder="Doe",
         ),
-        StringField(
+        TextAreaField(
             # BaseField
             name="contact_info",
             label="Contact info",
@@ -77,7 +77,7 @@ class DirectorsView(ModelView):
             label="Additional info",
             # StringField
             minlength=STR_MIN_LEN,
-            placeholder="Loves cats",
+            placeholder="The director who loves cats",
         ),
         HasOne(
             # BaseField
