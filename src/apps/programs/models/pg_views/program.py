@@ -9,9 +9,12 @@ class ProgramPgView(Base):
     __tablename__ = "program_view"
     __table_args__ = {"extend_existing": True}
 
-    code: Mapped[str] = mapped_column(
+    acgme_id: Mapped[str] = mapped_column(
         primary_key=True,
-        name="Code",
+        name="ACGME ID",
+    )
+    nrmp_code: Mapped[str | None] = mapped_column(
+        name="NRMP Code",
     )
     title: Mapped[str] = mapped_column(
         nullable=False,
@@ -68,4 +71,4 @@ class ProgramPgView(Base):
     )
 
     def __repr__(self) -> str:
-        return f"<ProgramPGView(code={self.code})>"
+        return f"<ProgramPGView(acgme_id={self.acgme_id})>"

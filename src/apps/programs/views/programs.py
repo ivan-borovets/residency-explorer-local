@@ -21,12 +21,12 @@ class ProgramsView(ModelView):
         ),
         StringField(
             # BaseField
-            name="code",
-            label="NRMP program code",
+            name="acgme_id",
+            label="ACGME ID",
             required=True,
             # StringField
             minlength=STR_MIN_LEN,
-            placeholder="2335140C2",
+            placeholder="1400121020",
         ),
         StringField(
             # BaseField
@@ -61,6 +61,14 @@ class ProgramsView(ModelView):
             required=True,
             # RelationField
             identity="state",
+        ),
+        StringField(
+            # BaseField
+            name="nrmp_code",
+            label="NRMP Code",
+            # StringField
+            minlength=STR_MIN_LEN,
+            placeholder="2335140C2",
         ),
         IntegerField(
             # BaseField

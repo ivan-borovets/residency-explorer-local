@@ -1,8 +1,8 @@
 """Program View
 
-Revision ID: 1b8686bd6757
-Revises: 9c8ab297443a
-Create Date: 2024-08-21 01:47:32.614147
+Revision ID: 1f7d874e8240
+Revises: 819a08ea4eb1
+Create Date: 2024-08-21 04:47:01.423544
 
 """
 
@@ -13,8 +13,8 @@ import sqlalchemy as sa
 from alembic import op
 
 # revision identifiers, used by Alembic.
-revision: str = "1b8686bd6757"
-down_revision: Union[str, None] = "9c8ab297443a"
+revision: str = "1f7d874e8240"
+down_revision: Union[str, None] = "819a08ea4eb1"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
@@ -26,7 +26,8 @@ def upgrade() -> None:
         f"""
         CREATE VIEW {view_name} AS
             SELECT
-                p.code AS "Code",
+                p.acgme_id AS "ACGME ID",
+                p.nrmp_code AS "NRMP Code",
                 p.title AS "Title",
                 p.city AS "City",
                 s.title AS "State",
@@ -60,11 +61,14 @@ def upgrade() -> None:
             LEFT JOIN
                 directors d ON d.program_id = p.id
             GROUP BY
-                p.code, p.title, p.city, m.title, s.title, r.title, 
-                p.user_rating, ps.percentage_non_us_img, ps.percentage_applicants_interviewed,
+                p.acgme_id, p.nrmp_code, 
+                p.title, p.city, m.title, 
+                s.title, r.title, p.user_rating, 
+                ps.percentage_non_us_img, ps.percentage_applicants_interviewed,
                 ps.internship_available, ps.more_than_two_russians_interviewed,
                 p.contact_info, p.additional_info,
-                d.first_name, d.last_name, d.specialty, d.home_country;
+                d.first_name, d.last_name, 
+                d.specialty, d.home_country;
         """
     )
     op.execute(view_creation_sql)

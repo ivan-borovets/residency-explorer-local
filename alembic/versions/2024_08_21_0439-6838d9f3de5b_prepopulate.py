@@ -1,8 +1,8 @@
 """Prepopulate
 
-Revision ID: 4661958e61ca
-Revises: 4de87ad54ee2
-Create Date: 2024-08-21 01:42:46.795964
+Revision ID: 6838d9f3de5b
+Revises: 972abce01dfb
+Create Date: 2024-08-21 04:39:52.375706
 
 """
 
@@ -17,8 +17,8 @@ from apps.programs.data.prepopulate_majors import prepopulate_majors
 from apps.programs.data.prepopulate_regions_states import prepopulate_regions_and_states
 
 # revision identifiers, used by Alembic.
-revision: str = "4661958e61ca"
-down_revision: Union[str, None] = "4de87ad54ee2"
+revision: str = "6838d9f3de5b"
+down_revision: Union[str, None] = "972abce01dfb"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 

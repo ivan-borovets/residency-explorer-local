@@ -13,7 +13,8 @@ from apps.programs.models.pg_views.program import ProgramPgView
 
 class ProgramPgViewView(ModelView):
     fields = [
-        StringField(name="code", label="Code"),
+        StringField(name="acgme_id", label="ACGME ID"),
+        StringField(name="nrmp_code", label="NRMP Code"),
         StringField(name="title", label="Title"),
         StringField(name="city", label="City"),
         StringField(name="state", label="State"),

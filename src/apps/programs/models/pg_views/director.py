@@ -7,9 +7,12 @@ class DirectorPgView(Base):
     __tablename__ = "director_view"
     __table_args__ = {"extend_existing": True}
 
-    code: Mapped[str] = mapped_column(
+    acgme_id: Mapped[str] = mapped_column(
         primary_key=True,
-        name="Program Code",
+        name="ACGME ID",
+    )
+    nrmp_code: Mapped[str | None] = mapped_column(
+        name="NRMP Code",
     )
     name: Mapped[str] = mapped_column(
         nullable=False,
@@ -38,4 +41,4 @@ class DirectorPgView(Base):
     )
 
     def __repr__(self) -> str:
-        return f"<DirectorPGView(code={self.code})>"
+        return f"<DirectorPGView(acgme_id={self.acgme_id})>"

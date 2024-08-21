@@ -39,7 +39,7 @@ class AlumniView(ModelView):
             minlength=STR_MIN_LEN,
             placeholder="Doe",
         ),
-        StringField(
+        TextAreaField(
             # BaseField
             name="contact_info",
             label="Contact info",

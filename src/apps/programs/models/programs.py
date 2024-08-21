@@ -18,7 +18,7 @@ CHECK_USER_RATING = "user_rating IS NULL OR (user_rating >= 1 AND user_rating <=
 
 class Program(AutoTableNameMixin, IntIdPkMixin, Base):
     # required
-    code: Mapped[str] = mapped_column(
+    acgme_id: Mapped[str] = mapped_column(
         nullable=False,
         unique=True,
         index=True,
@@ -37,6 +37,7 @@ class Program(AutoTableNameMixin, IntIdPkMixin, Base):
         index=True,
     )
     # optional
+    nrmp_code: Mapped[str | None]
     user_rating: Mapped[int | None] = mapped_column()
     contact_info: Mapped[str | None] = mapped_column()
     additional_info: Mapped[str | None] = mapped_column()
@@ -61,7 +62,7 @@ class Program(AutoTableNameMixin, IntIdPkMixin, Base):
     state: Mapped["State"] = relationship(back_populates="programs")
 
     def __repr__(self) -> str:
-        return f"<Program(id={self.id}, code={self.code}, title={self.title})>"
+        return f"<Program(id={self.id}, id={self.acgme_id}, title={self.title})>"
 
     async def __admin_repr__(self, request: Request):
         return f"{self.title}"

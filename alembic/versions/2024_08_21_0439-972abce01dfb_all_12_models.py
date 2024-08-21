@@ -1,8 +1,8 @@
 """All 12 models
 
-Revision ID: 4de87ad54ee2
+Revision ID: 972abce01dfb
 Revises: 
-Create Date: 2024-08-21 01:41:03.619729
+Create Date: 2024-08-21 04:39:13.734683
 
 """
 
@@ -13,7 +13,7 @@ import sqlalchemy as sa
 from alembic import op
 
 # revision identifiers, used by Alembic.
-revision: str = "4de87ad54ee2"
+revision: str = "972abce01dfb"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -88,11 +88,12 @@ def upgrade() -> None:
     op.create_index(op.f("ix_states_title"), "states", ["title"], unique=True)
     op.create_table(
         "programs",
-        sa.Column("code", sa.String(), nullable=False),
+        sa.Column("acgme_id", sa.String(), nullable=False),
         sa.Column("title", sa.String(), nullable=False),
         sa.Column("city", sa.String(), nullable=False),
         sa.Column("major_id", sa.Integer(), nullable=False),
         sa.Column("state_id", sa.Integer(), nullable=False),
+        sa.Column("nrmp_code", sa.String(), nullable=True),
         sa.Column("user_rating", sa.Integer(), nullable=True),
         sa.Column("contact_info", sa.String(), nullable=True),
         sa.Column("additional_info", sa.String(), nullable=True),
@@ -113,7 +114,7 @@ def upgrade() -> None:
         ),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_programs")),
     )
-    op.create_index(op.f("ix_programs_code"), "programs", ["code"], unique=True)
+    op.create_index(op.f("ix_programs_acgme_id"), "programs", ["acgme_id"], unique=True)
     op.create_index(
         op.f("ix_programs_major_id"), "programs", ["major_id"], unique=False
     )
@@ -244,7 +245,7 @@ def downgrade() -> None:
     op.drop_table("directors")
     op.drop_index(op.f("ix_programs_state_id"), table_name="programs")
     op.drop_index(op.f("ix_programs_major_id"), table_name="programs")
-    op.drop_index(op.f("ix_programs_code"), table_name="programs")
+    op.drop_index(op.f("ix_programs_acgme_id"), table_name="programs")
     op.drop_table("programs")
     op.drop_index(op.f("ix_states_title"), table_name="states")
     op.drop_index(op.f("ix_states_region_id"), table_name="states")

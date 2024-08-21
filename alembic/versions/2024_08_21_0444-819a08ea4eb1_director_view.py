@@ -1,8 +1,8 @@
 """Director View
 
-Revision ID: 9c8ab297443a
-Revises: 4661958e61ca
-Create Date: 2024-08-21 01:46:28.345317
+Revision ID: 819a08ea4eb1
+Revises: 6838d9f3de5b
+Create Date: 2024-08-21 04:44:13.074584
 
 """
 
@@ -13,8 +13,8 @@ import sqlalchemy as sa
 from alembic import op
 
 # revision identifiers, used by Alembic.
-revision: str = "9c8ab297443a"
-down_revision: Union[str, None] = "4661958e61ca"
+revision: str = "819a08ea4eb1"
+down_revision: Union[str, None] = "6838d9f3de5b"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
@@ -26,7 +26,8 @@ def upgrade() -> None:
         f"""
         CREATE VIEW {view_name} AS
             SELECT
-                p.code AS "Program Code",
+                p.acgme_id AS "ACGME ID",
+                p.nrmp_code AS "NRMP Code",
                 d.first_name || ' ' || d.last_name AS "Name",       
                 d.contact_info AS "Contact",
                 d.specialty AS "Specialty",
@@ -47,7 +48,10 @@ def upgrade() -> None:
             LEFT JOIN
                 alumni a ON a.id = da.alumni_id
             GROUP BY
-                p.code, d.first_name, d.last_name, d.contact_info, d.specialty, d.home_country, d.additional_info;
+                p.acgme_id, p.nrmp_code, 
+                d.first_name, d.last_name, 
+                d.contact_info, d.specialty, 
+                d.home_country, d.additional_info;
         """
     )
     op.execute(view_creation_sql)

@@ -7,7 +7,8 @@ from apps.programs.models.pg_views.director import DirectorPgView
 
 class DirectorPgViewView(ModelView):
     fields = [
-        StringField(name="code", label="Program Code"),
+        StringField(name="acgme_id", label="ACGME ID"),
+        StringField(name="nrmp_code", label="NRMP Code"),
         StringField(name="name", label="Name"),
         StringField(name="contact", label="Contact"),
         StringField(name="specialty", label="Specialty"),

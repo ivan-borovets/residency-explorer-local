@@ -10,12 +10,13 @@ class ProgramIn(BaseModel):
         arbitrary_types_allowed = True
 
     # required
-    code: str = Field(min_length=STR_MIN_LEN)
+    acgme_id: str = Field(min_length=STR_MIN_LEN)
     title: str = Field(min_length=STR_MIN_LEN)
     city: str = Field(min_length=STR_MIN_LEN)
     major: Major
     state: State
     # optional
+    nrmp_code: str | None
     user_rating: int | None
     contact_info: str | None
     additional_info: str | None
