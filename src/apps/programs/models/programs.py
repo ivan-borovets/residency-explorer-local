@@ -64,5 +64,5 @@ class Program(AutoTableNameMixin, IntIdPkMixin, Base):
     def __repr__(self) -> str:
         return f"<Program(id={self.id}, id={self.acgme_id}, title={self.title})>"
 
-    async def __admin_repr__(self, request: Request):
+    async def __admin_repr__(self, request: Request) -> str:
         return f"{self.title}"

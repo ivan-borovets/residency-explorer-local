@@ -52,5 +52,5 @@ class Director(AutoTableNameMixin, IntIdPkMixin, Base):
     def __repr__(self) -> str:
         return f"<Director(id={self.id}, name={self.first_name} {self.last_name})>"
 
-    async def __admin_repr__(self, request: Request):
+    async def __admin_repr__(self, request: Request) -> str:
         return f"{self.first_name} {self.last_name}"

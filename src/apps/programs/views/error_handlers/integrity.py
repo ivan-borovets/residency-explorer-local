@@ -1,15 +1,15 @@
 from functools import wraps
-from typing import Any, Type
+from typing import Any, Callable, Type
 
 from pydantic import BaseModel
 from sqlalchemy.exc import IntegrityError
 from starlette_admin.exceptions import FormValidationError
 
 
-def handle_unique_violation(schema: Type[BaseModel]):
-    def decorator(func):
+def handle_unique_violation(schema: Type[BaseModel]) -> Callable[[Any], Any]:
+    def decorator(func: Callable[[Any], Any]) -> Callable[[Any], Any]:
         @wraps(func)
-        async def wrapper(*args, **kwargs):
+        async def wrapper(*args: Any, **kwargs: Any) -> Any:
             try:
                 return await func(*args, **kwargs)
             except IntegrityError as e:
@@ -27,10 +27,12 @@ def handle_unique_violation(schema: Type[BaseModel]):
     return decorator
 
 
-def handle_not_null_violation(schema: Type[BaseModel]):
-    def decorator(func):
+def handle_not_null_violation(
+    schema: Type[BaseModel],
+) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @wraps(func)
-        async def wrapper(view_instance: Any, *args, **kwargs):
+        async def wrapper(view_instance: Any, *args: Any, **kwargs: Any) -> Any:
             try:
                 return await func(view_instance, *args, **kwargs)
             except IntegrityError as e:

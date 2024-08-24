@@ -117,7 +117,7 @@ regions_data = (
 )
 
 
-def prepopulate_regions_and_states(session: Session):
+def prepopulate_regions_and_states(session: Session) -> None:
     regions = []
     for region_data in regions_data:
         region = Region(title=region_data.title)

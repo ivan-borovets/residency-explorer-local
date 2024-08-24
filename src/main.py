@@ -8,7 +8,7 @@ from admin import admin
 from core.settings import settings
 
 
-async def home_root(request: Request):
+async def home_root(request: Request) -> RedirectResponse:
     return RedirectResponse(url="/program-pg-view/list")
 
 

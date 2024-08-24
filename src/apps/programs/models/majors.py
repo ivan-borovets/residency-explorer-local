@@ -25,5 +25,5 @@ class Major(AutoTableNameMixin, IntIdPkMixin, Base):
     def __repr__(self) -> str:
         return f"<Major(id={self.id}, title={self.title})>"
 
-    async def __admin_repr__(self, request: Request):
+    async def __admin_repr__(self, request: Request) -> str:
         return f"{self.title}"

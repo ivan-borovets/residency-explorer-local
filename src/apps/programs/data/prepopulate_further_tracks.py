@@ -18,8 +18,7 @@ further_tracks_data = [
 ]
 
 
-def prepopulate_further_tracks(session: Session):
-    for further_track_data in further_tracks_data:
-        further_track = FurtherTrack(title=further_track_data.title)
-        session.add(further_track)
+def prepopulate_further_tracks(session: Session) -> None:
+    further_tracks = [FurtherTrack(title=data.title) for data in further_tracks_data]
+    session.add_all(further_tracks)
     session.commit()

@@ -16,8 +16,7 @@ majors_data = [
 ]
 
 
-def prepopulate_majors(session: Session):
-    for major_data in majors_data:
-        major = Major(title=major_data.title)
-        session.add(major)
+def prepopulate_majors(session: Session) -> None:
+    majors = [Major(title=major_data.title) for major_data in majors_data]
+    session.add_all(majors)
     session.commit()
