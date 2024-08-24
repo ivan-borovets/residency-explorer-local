@@ -1,6 +1,6 @@
 # Residency Explorer Local
 
-`residency-explorer-local` is a locally hosted web app that simplifies
+**residency-explorer-local** is a locally hosted web app that simplifies
 managing data about medical residency programs in the US, aiding prospective
 residents in making informed decisions during the Residency Match process.
 
@@ -42,6 +42,10 @@ residents in making informed decisions during the Residency Match process.
       python ./scripts/generate_dotenv/dotenv_from_toml.py
       ```
 
+   > Unfortunately, you will need to figure out how to install Python if you don't have it already.
+   
+    > Alternatively, you can use **an unsafe method**: simply rename `.env.example` to `.env` in the root directory of the project.
+
 ## Running the Application (for Windows users)
 
 ### First-Time Launch
@@ -70,6 +74,32 @@ to open the application in your browser.
 you're done using it to free up system resources.
 
 ![DockerAnn](media/12DockerAnn.png)
+
+## How to Use
+
+1. Create a Program in the `Programs` Section.
+2. Once a Program is created, you can add associated statistics in the `Program statistics`
+   section and assign a director in the `Directors` section.
+3. After a director is added, you can further enrich the data by adding peers (colleagues)
+   in the `Directors' Peers` section and alumni in the `Directors' Alumni` section.
+
+### **Q: Why this order?**
+
+> **A:** Adding a director without a program, or peers without a director, is meaningless because these relationships
+> are required for the data to be relevant and connected.
+
+Summary information about the programs will be displayed in the `Program Overview`, and summary information about
+directors will be available in the `Director Overview`. These are convenient tables for searching and sorting
+information.
+
+**Each table can be exported to CSV, Excel, or PDF.** For the highest quality PDF export, it is recommended to use
+the `Print` option and save as PDF.
+
+![Export](media/14Export.png)
+
+The `Predefined` tab contains pre-filled auxiliary tables. You can edit these tables as needed. However, it is
+recommended not to delete rows that are linked to other tables, as this may cause those linked entries to be deleted as
+well.
 
 ## For Developers
 
@@ -108,21 +138,16 @@ you're done using it to free up system resources.
 
 The primary configuration file for the application is `config.toml`.
 After making any changes to this file, you must generate a new `.env` file.
-This can be done using the scripts available in the
-`./scripts/generate_dotenv/` directory for either `Python` or `Bash`.
-
-Alternatively, you can use the following Makefile commands to generate the `.env` file:
-
-For Python:
+This can be done using
 
 ```bash
-make dotenv.py
+python ./scripts/generate_dotenv/dotenv_from_toml.py
 ```
 
-For Bash:
+Alternatively, you can use the following `Makefile` command to generate the `.env` file:
 
 ```bash
-make dotenv.sh
+make dotenv
 ```
 
 It's important to ensure that the `.env` file is correct, as only with
