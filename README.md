@@ -43,8 +43,9 @@ residents in making informed decisions during the Residency Match process.
       ```
 
    > Unfortunately, you will need to figure out how to install Python if you don't have it already.
-   
-    > Alternatively, you can use **an unsafe method**: simply rename `.env.example` to `.env` in the root directory of the project.
+
+   > Alternatively, you can use **an unsafe method**: simply rename `.env.example` to `.env` in the root directory of
+   the project.
 
 ## Running the Application (for Windows users)
 
@@ -133,6 +134,9 @@ well.
 ### Database schema
 
 ![Database Schema](media/13ERD_Residency.png)
+This diagram was created using [dbdiagram.io](https://dbdiagram.io).
+The database schema code is available in the `./docs/database_schema.dbml`
+file.
 
 ### Customization
 

@@ -1,0 +1,136 @@
+Table programs {
+  id int [pk, increment]
+  acgme_id varchar [not null, unique]
+  major_id int [not null, ref: > majors.id]
+  title varchar [not null]
+  city varchar [not null]
+  state_id int [ref: > states.id, not null]
+  nrmp_code varchar
+  contact_info varchar
+  user_rating int [note: "1-5"]
+  additional_info varchar
+
+  indexes {
+    acgme_id
+    state_id
+  }
+}
+
+Table states {
+  id int [pk, increment]
+  title varchar [unique, not null]
+  region_id int [ref: > regions.id, not null]
+
+  indexes {
+    title
+  }
+}
+
+Table regions {
+  id int [pk, increment]
+  title varchar [unique, not null]
+
+  indexes {
+    title
+  }
+}
+
+
+Table directors {
+  id int [pk, increment]
+  first_name varchar [not null]
+  last_name varchar [not null]
+  contact_info varchar [not null]
+  program_id int [ref: - programs.id, not null]
+  specialty varchar
+  home_country varchar
+  additional_info varchar
+
+  indexes {
+    first_name
+    last_name
+  }
+}
+
+Table directors_peers {
+  director_id int [ref: > directors.id]
+  peer_id int [ref: > peers.id]
+
+  indexes {
+    (director_id, peer_id) [pk]
+  }
+}
+
+Table peers {
+  id int [pk, increment]
+  first_name varchar [not null]
+  last_name varchar [not null]
+  contact_info varchar [not null]
+  position varchar [not null]
+  additional_info varchar
+
+  indexes {
+    first_name
+    last_name
+  }
+}
+
+Table directors_alumni {
+  director_id int [ref: > directors.id]
+  alumni_id int [ref: > alumni.id]
+
+  indexes {
+    (director_id, alumni_id) [pk]
+  }
+}
+
+Table alumni {
+  id int [pk, increment]
+  first_name varchar [not null]
+  last_name varchar [not null]
+  contact_info varchar [not null]
+  work_location varchar
+  additional_info varchar
+
+  indexes {
+    first_name
+    last_name
+  }
+}
+
+Table program_statistics {
+  id int [pk, increment]
+  program_id int [not null, ref: - programs.id]
+  percentage_non_us_img decimal [not null, note: "0-100"]
+  percentage_applicants_interviewed decimal [note: "0-100"]
+  internship_available boolean
+  more_than_two_russians_interviewed boolean
+  additional_info varchar
+}
+
+Table stats_tracks {
+  stat_id int [ref: > program_statistics.id]
+  track_id int [ref: > further_tracks.id]
+
+  indexes {
+    (stat_id, track_id) [pk]
+  }
+}
+
+Table further_tracks {
+  id int [pk, increment]
+  title varchar [unique, not null]
+
+  indexes {
+    title
+  }
+}
+
+Table majors {
+  id int [pk, increment]
+  title varchar [unique, not null]
+
+  indexes {
+    title
+  }
+}
